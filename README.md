@@ -6,10 +6,7 @@ Este proyecto es un SDK en TypeScript para Node.js que permite interactuar con l
 Dentro del proyecto verás las estructura de carpetas y archivos:
 
 ```
-/
-├── build/
-│   └── (código para despliegue)
-|       
+/      
 ├── src/
 │   ├── api/
 │   │   └── auth.ts

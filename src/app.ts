@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import { login, register, logout } from './api/auth';
-import { getUser, deposit, updateaUser, withdraw } from './api/user';
+import { getUser, deposit, updateUser, withdraw } from './api/user';
 import { Deposit, Withdraw } from './interfaces';
 import { Login } from './interfaces/login';
 
@@ -26,8 +26,6 @@ const newWithdraw: Withdraw = {
 };
 
 (async () => {
-  const data = await logout(
-    '377448|dYQ5hYOcKp3erKKVZny3jxebwmuymnjJI1KakmGb'
-  );
+  const data = await withdraw('', newWithdraw);
   console.log(data);
 })();

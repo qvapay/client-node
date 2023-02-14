@@ -27,4 +27,5 @@ Dentro del proyecto verás las estructura de carpetas y archivos:
 ```
 yarn install
 ```
+- Configura tus variables de entorno. (Tienes un fichero de muestra.)
 - Mueve las manos 😅

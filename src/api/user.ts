@@ -25,7 +25,7 @@ export const getUser = async (bearerToken: string): Promise<User> => {
   }
 };
 
-export const updateaUser = async (
+export const updateUser = async (
   bearerToken: string,
   dataToUpdate: UpdateUser
 ): Promise<Me> => {

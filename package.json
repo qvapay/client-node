@@ -5,7 +5,7 @@
   "repository": "https://github.com/qvacode/client-node.git",
   "author": "qvacode <d3vqva@gmail.com>",
   "license": "MIT",
-  "script": {
+  "scripts": {
     "dev": "nodemon src/app.ts"
   },
   "dependencies": {

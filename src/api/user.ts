@@ -10,11 +10,11 @@ import {
   Withdraw,
 } from '../interfaces';
 
-export const getUser = async (bearerToken: string): Promise<User> => {
+export const getUser = async (accessToken: string): Promise<User> => {
   try {
     const { data } = await qvapayAPI.get('/user', {
       headers: {
-        Authorization: `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return data;
@@ -26,13 +26,13 @@ export const getUser = async (bearerToken: string): Promise<User> => {
 };
 
 export const updateUser = async (
-  bearerToken: string,
+  accessToken: string,
   dataToUpdate: UpdateUser
 ): Promise<Me> => {
   try {
     const { data } = await qvapayAPI.put('/user', dataToUpdate, {
       headers: {
-        Authorization: `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return data;
@@ -44,13 +44,13 @@ export const updateUser = async (
 };
 
 export const deposit = async (
-  bearerToken: string,
+  accessToken: string,
   newDeposit: Deposit
 ): Promise<Transaction> => {
   try {
     const { data } = await qvapayAPI.post('/topup', newDeposit, {
       headers: {
-        Authorization: `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return data;
@@ -61,11 +61,11 @@ export const deposit = async (
   }
 };
 
-export const withdraw = async (bearerToken: string, newWithdraw: Withdraw) => {
+export const withdraw = async (accessToken: string, newWithdraw: Withdraw) => {
   try {
     const { data } = await qvapayAPI.post('/withdraw', newWithdraw, {
       headers: {
-        Authorization: `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return data;

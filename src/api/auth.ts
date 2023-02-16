@@ -24,14 +24,14 @@ export const register = async (registerData: Register) => {
   }
 };
 
-//* bearerToken es el token que retorna la función login
+//* accessToken es el token que retorna la función login
 export const logout = async (
-  bearerToken: string
+  accessToken: string
 ): Promise<{ message: string }> => {
   try {
     const { data } = await qvapayAPI.get('/auth/logout', {
       headers: {
-        Authorization: `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return data;

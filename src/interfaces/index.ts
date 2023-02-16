@@ -10,6 +10,20 @@ import { Me } from './me';
 import { Deposit } from './deposit';
 import { Transaction } from './transaction';
 import { Withdraw } from './withdraw';
+import { TransactionProps } from './transactionParams';
+import { TransactionResponse } from './transactionResponse';
+import { WithdrawResponse } from './withdrawResponse';
+import { TransactionBetweenUser } from './transactionBetweenUser';
+import { TransactionPay } from './transactionPay';
+import { PayResponse } from './payResponse';
+import { AppAuth } from './appAuth';
+import { AppInfo } from './appInfo';
+import { Invoice } from './invoice';
+import { InvoiceResponse } from './invoiceResponse';
+import { AppTransaction } from './appTransaction';
+import { AppOneTransactionResponse } from './appOneTransactionResponse';
+import { PaymentLinkResponse } from './paymentLinkResponse';
+import { PaymentLink } from './paymentLink';
 
 export {
   LatestTransaction,
@@ -24,4 +38,18 @@ export {
   Deposit,
   Transaction,
   Withdraw,
+  TransactionProps,
+  TransactionResponse,
+  WithdrawResponse,
+  TransactionBetweenUser,
+  TransactionPay,
+  PayResponse,
+  AppAuth,
+  AppInfo,
+  Invoice,
+  InvoiceResponse,
+  AppTransaction,
+  AppOneTransactionResponse,
+  PaymentLinkResponse,
+  PaymentLink,
 };

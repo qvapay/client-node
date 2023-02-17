@@ -14,7 +14,8 @@
     "build": "tsc",
     "dev": "nodemon ./src/index.ts",
     "prepare": "npm run build",
-    "p": "npm publish"
+    "p": "npm publish",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^1.3.3",
@@ -24,6 +25,9 @@
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
-    "@types/node": "^18.13.0"
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.13.0",
+    "jest": "^29.4.3",
+    "ts-jest": "^29.0.5"
   }
 }

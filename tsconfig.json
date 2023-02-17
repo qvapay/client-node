@@ -1,25 +1,26 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es2016",  
-    
+    "target": "es2015",
+
     /* Modules */
-    "module": "commonjs",                                /* Specify what module code is generated. */
-    "rootDir": "./src",  
-    
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "rootDir": "./src",
+
     /* Emit */
-    "outDir": "./build",                                   /* Specify an output folder for all emitted files. */
-    "removeComments": true,                           /* Disable emitting comments. */
-    
+    "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+    "removeComments": false /* Disable emitting comments. */,
+
     /* Interop Constraints */
-    "esModuleInterop": true,   
-    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
 
     /* Type Checking */
-    "strict": true,                                      /* Enable all strict type-checking options. */
-    "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 
-    
+    "strict": true /* Enable all strict type-checking options. */,
+    "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied */,
+    "declaration": true,
+
     /* Completeness */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
   }
 }

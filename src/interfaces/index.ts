@@ -24,6 +24,14 @@ import { AppTransaction } from './appTransaction';
 import { AppOneTransactionResponse } from './appOneTransactionResponse';
 import { PaymentLinkResponse } from './paymentLinkResponse';
 import { PaymentLink } from './paymentLink';
+import { ServiceResponse } from './servicesResponse';
+import { Service } from './service';
+import { PairsAverageResponse } from './pairsAverageResponse';
+import { OffersParams } from './offersParams';
+import { OffersResponse } from './offersResponse';
+import { Offer } from './offer';
+import { Coin } from './coin';
+import { CurrentRates } from './currentRates';
 
 export {
   LatestTransaction,
@@ -52,4 +60,12 @@ export {
   AppOneTransactionResponse,
   PaymentLinkResponse,
   PaymentLink,
+  ServiceResponse,
+  Service,
+  PairsAverageResponse,
+  OffersParams,
+  OffersResponse,
+  Offer,
+  Coin,
+  CurrentRates
 };

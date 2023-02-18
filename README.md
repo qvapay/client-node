@@ -106,9 +106,9 @@ import { login, logout } from 'qvapay-sdk';
 const { accessToken } = await login(userLogin);
 const res = await logout(accessToken);
 ```
-```
-🔔 En los ejemplos que siguen, se usa el accessToken que retorna la función login(). Sin embargo, tenga presente que usted puede guardar este token de la forma que prefiera y usarlo posteriormente para realizar operaciones en su aplicación.
-```
+
+> 🔔 En los ejemplos que siguen, se usa el accessToken que retorna la función login(). Sin embargo, tenga presente que usted puede guardar este token de la forma que prefiera y usarlo posteriormente para realizar operaciones en su aplicación.
+
 
 ## 😎 User:
 
@@ -489,6 +489,4 @@ import { currentCoins } from 'qvapay-sdk';
 const res = await currentCoins();
 ```
 
-```
-💡 Este proyecto está en desarrollo y busca ofrecer una solución de código abierto para interactuar con la API de QvaPay. Estamos abiertos a cualquier sugerencia o feedback que nos ayude a mejorar el proyecto. Estamos comprometidos con la satisfacción de nuestros usuarios, por lo que cualquier contribución es bienvenida. Si tienes alguna idea para mejorar el proyecto, no dudes en compartirla con nosotros. ¡Estamos ansiosos por escuchar tus ideas!
-```
+> 💡 Este proyecto está en desarrollo y busca ofrecer una solución de código abierto para interactuar con la API de QvaPay. Estamos abiertos a cualquier sugerencia o feedback que nos ayude a mejorar el proyecto. Estamos comprometidos con la satisfacción de nuestros usuarios, por lo que cualquier contribución es bienvenida. Si tienes alguna idea para mejorar el proyecto, no dudes en compartirla con nosotros. ¡Estamos ansiosos por escuchar tus ideas!

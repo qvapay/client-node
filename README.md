@@ -42,7 +42,7 @@ EMAIL=
 PASSWORD=
 ```
 
-3. Cree un objeto de con sus credenciales para hacer login:
+3. Cree un objeto con sus credenciales, incluyendo nombre de usuario y contraseña. Asegúrese de que la contraseña sea segura y no se comparta con nadie:
 
 ```js
 const userLogin = {
@@ -51,7 +51,7 @@ const userLogin = {
 };
 ```
 
-4. Cree un objeto con sus credenciales de Auth para su app:
+4. Cree un objeto con sus credenciales de Auth para su aplicación:
 
 ```js
 const appAuth = {
@@ -60,7 +60,7 @@ const appAuth = {
 };
 ```
 
-> Ya estás listo para comenzar a usar todas las funciones que te provee este SDK.
+> Ahora que has instalado el SDK y configurado sus opciones primarias, estás listo para comenzar a usar todas las funcionalidades que te ofrece. ¡Aprovecha al máximo todas las posibilidades que este SDK te ofrece!
 
 ---
 
@@ -107,7 +107,7 @@ const { accessToken } = await login(userLogin);
 const res = await logout(accessToken);
 ```
 
----
+<p style='padding: 20px; background-color: #183A1D'>🔔 <b>En los ejemplos que siguen, se usa el accessToken que retorna la función login(). Sin embargo, tenga presente que usted puede guardar este token de la forma que prefiera y usarlo posteriormente para realizar operaciones en su aplicación.</b></p>
 
 ## 😎 User:
 
@@ -267,13 +267,225 @@ const res = await transferBetweenUser(accessToken, transfer);
 > Esta función se encarga de realizar el pago de una transacción pendiente. Toma como parámetros el token de acceso y los detalles de la transacción a pagar. Intenta realizar el pago utilizando la API Qvapay y devuelve una respuesta con los resultados. Si hay un error, devuelve los datos del error. El PIN por defecto es 0000, pero se recomienda configurar un PIN secreto en el panel de usuario para mayor seguridad.
 
 ```js
-import { login, payPendingTransaction } from 'qvapay-sdk'
+import { login, payPendingTransaction } from 'qvapay-sdk';
 
 const { accessToken } = await login(userLogin);
 const pay = {
-    "uuid": "710296b7-0d5d-4e86-ab1b-9d79080dd042",
-    "pin": "0000"
-}
+  uuid: '710296b7-0d5d-4e86-ab1b-9d79080dd042',
+  pin: '0000',
+};
 
-const res = await payPendingTransaction(accessToken, pay)
+const res = await payPendingTransaction(accessToken, pay);
 ```
+
+---
+
+## 🤑 Merchants
+
+> La sección Merchants le permite a los usuarios realizar operaciones financieras como consultar el saldo de una aplicación, obtener información sobre una aplicación, crear facturas, obtener una transacción de una aplicación y obtener transacciones de una aplicación. Estas funcionalidades le permiten al usuario administrar sus finanzas con facilidad y seguridad.
+
+### appInfo
+
+> Esta función se utiliza para obtener información sobre una aplicación. La función toma un objeto "AppAuth" como parámetro y devuelve un objeto "AppInfo" como promesa. La función intenta realizar una solicitud POST a la API qvapay para obtener la información de la aplicación. Si la solicitud es exitosa, devuelve los datos recibidos en el objeto "data". Si hay algún error, devuelve los datos recibidos en el objeto "response".
+
+```js
+import { appInfo } from 'qvapay-sdk';
+
+const res = await appInfo(appAuth);
+```
+
+### appBalance
+
+> Esta función se utiliza para obtener el saldo de una aplicación. Utiliza la API de Qvapay para enviar una solicitud POST con los datos de autenticación de la aplicación. Si la solicitud se procesa correctamente, devuelve los datos del saldo. Si hay un error, devuelve los datos del error.
+
+```js
+import { appBalance } from 'qvapay-sdk';
+
+const res = await appBalance(appAuth);
+```
+
+### createInvoice
+
+> Esta función permite crear una factura mediante la API de Qvapay. La función toma un objeto "invoice" como parámetro y devuelve una promesa con el objeto de respuesta "InvoiceResponse". El código intenta realizar una solicitud POST a la API de Qvapay para crear la factura. Si hay algún error, el código captura el error y devuelve los datos de la respuesta.
+
+```js
+import { createInvoice } from 'qvapay-sdk';
+
+const invoice = {
+  ...appAuth,
+  amount: 99.99,
+  description: 'Enanitos verdes',
+  remote_id: 'MY_OWN_CUSTOM_ID',
+  signed: 1,
+};
+const res = await createInvoice(invoice);
+```
+
+### getTransactionsFromApp
+
+> Esta función toma un parámetro auth de tipo AppAuth. Esta función hace una solicitud POST a la API qvapay para obtener datos de transacciones. Si la solicitud se realiza con éxito, devuelve los datos recuperados en formato de promesa. Si hay algún error, devuelve los datos recuperados en el objeto de respuesta AxiosError.
+
+```js
+import { getTransactionsFromApp } from 'qvapay-sdk';
+
+const res = await getTransactionsFromApp(appAuth);
+```
+
+### getOneTransactionFromApp
+
+> Esta función se utiliza para obtener una transacción específica de una aplicación. Toma dos parámetros: auth (una autenticación de la aplicación) y id (el identificador de la transacción). La función envía una solicitud POST al servidor para recuperar los datos de la transacción especificada. Si la solicitud tiene éxito, devuelve los datos recuperados. En caso contrario, devuelve los datos del error.
+
+```js
+import { getOneTransactionFromApp } from 'qvapay-sdk';
+
+const id = '54079648-39bc-49ef-bd3e-b89032a7ac05';
+const res = await getOneTransactionFromApp(appAuth, id);
+```
+
+---
+
+## 🔗 Payment Links
+
+> La sección Payment Links le permite a los usuarios crear enlaces de pago personalizados para recibir pagos de sus clientes. Estos enlaces pueden ser compartidos a través de correo electrónico, redes sociales o cualquier otra plataforma para que los clientes realicen el pago directamente desde su dispositivo. Además, la sección Payment Links también le permite al usuario ver todos los enlaces de pago creados y consultar el estado de cada uno.
+
+### getAllPaymentLinks
+
+> Esta función se utiliza para obtener todos los enlaces de pago. Utiliza la API QVAPay para realizar una solicitud GET a la ruta '/payment_links' con el token de acceso proporcionado como encabezado. Si la solicitud se realiza correctamente, devuelve los datos recibidos en la respuesta. En caso de error, devuelve los datos recibidos en la respuesta del error.
+
+```js
+import { login, getAllPaymentLinks } from 'qvapay-sdk';
+
+const { accessToken } = await login(userLogin);
+const res = await getAllPaymentLinks(accessToken);
+```
+
+### createPaymentLink
+
+> Esta función crea un enlace de pago usando la API de Qvapay. Toma un token de acceso y un objeto con información sobre el pago como parámetros, realiza una solicitud POST a la API y devuelve los datos de respuesta. Si hay algún error, captura la excepción y devuelve los datos de respuesta.
+
+```js
+import { login, createPaymentLink } from 'qvapay-sdk';
+
+const { accessToken } = await login(userLogin);
+const info = {
+  name: 'Pulover de guinga azul',
+  product_id: 'PVG-AZUL',
+  amount: 10.32,
+};
+
+const res = await createPaymentLink(accessToken, info);
+```
+
+---
+
+## 🤖 Services
+
+> Nuestra sección de servicios cuenta con dos funcionalidades principales: getAllServices y getOneService, que te permiten obtener información detallada sobre cada uno de nuestros servicios.
+
+### getAllServices
+
+> Esta función se encarga de obtener todos los servicios disponibles. Esta función toma un token de acceso como parámetro y realiza una solicitud GET a la API qvapay para obtener los datos de los servicios. Si la solicitud es exitosa, devuelve los datos como respuesta. En caso contrario, devuelve los datos de la respuesta del error.
+
+```js
+import { login, getAllServices } from 'qvapay-sdk';
+
+const { accessToken } = await login(userLogin);
+const res = await getAllServices(accessToken);
+```
+
+### getOneService
+
+> Esta función se utiliza para obtener un servicio específico utilizando un token de acceso y un ID. Utiliza la API Qvapay para realizar la solicitud y devolver los datos del servicio solicitado. Si hay un error, maneja el error y devuelve los datos de la respuesta.
+
+```js
+import { login, getOneService } from 'qvapay-sdk';
+
+const { accessToken } = await login(userLogin);
+const id = 'e286449c-5bf4-4fbc-9a85-95bb5b54c73e';
+
+const res = await getOneService(accessToken, id);
+```
+
+---
+
+## 💆‍♂️ P2P
+
+> La sección P2P ofrece una variedad de funciones para facilitar el intercambio de monedas digitales entre usuarios. Estas funciones incluyen getEnabledCurrencies, que permite a los usuarios ver qué monedas están habilitadas para el intercambio; getOffers, que permite a los usuarios ver todas las ofertas disponibles; getOneOffer, que permite a los usuarios ver una oferta específica; y getPairsAverage, que calcula el promedio de precios para un par de monedas específico. Estas herramientas permiten a los usuarios realizar transacciones rápidas y seguras con otros usuarios en la plataforma.
+
+### getEnabledCurrencies
+
+> Esta función se utiliza para obtener una lista de monedas habilitadas. Utiliza la API de Qvapay para realizar una solicitud GET a la ruta '/p2p/get_coins_list'. Si la solicitud se completa con éxito, devuelve los datos recibidos. Si hay algún error, devuelve los datos de la respuesta del error.
+
+```js
+import { getEnabledCurrencies } from 'qvapay-sdk';
+
+const res = await getEnabledCurrencies();
+```
+
+### getPairsAverage
+
+> Esta función se utiliza para obtener el promedio de pares completados para una moneda específica. Utiliza la API de Qvapay para realizar la solicitud y devuelve los datos como una respuesta de promesa. En caso de que ocurra un error, maneja la excepción y devuelve los datos del error como respuesta.
+
+```js
+import { getPairsAverage } from 'qvapay-sdk';
+
+const coin = 'TRX';
+const res = await getPairsAverage(coin);
+```
+
+### getOffers
+
+> Esta función toma dos parámetros: accessToken y props. Primero, convierte los parámetros en un objeto URLSearchParams y luego realiza una solicitud GET a la API con el token de acceso proporcionado como encabezado de autorización. Si la solicitud se completa correctamente, devuelve los datos recibidos. Si hay algún error, devuelve los datos del error recibido en la respuesta.
+
+```js
+import { login, getOffers } from 'qvapay-sdk';
+
+const { accessToken } = await login(userLogin);
+const props = {
+  type: 'buy',
+  coin: 'ETECSA',
+  min: 1,
+  max: 50,
+};
+const res = await getOffers(accessToken, props);
+```
+
+### getOneOffer
+
+> Esta función se utiliza para obtener una oferta específica a través de la API QVapay. La función toma dos parámetros: accessToken y id. Utiliza el token de acceso para autenticar la solicitud y el id para identificar la oferta específica. Luego, realiza una solicitud GET a la API QVapay para recuperar los datos de la oferta. Si hay algún error, manejará la respuesta del servidor y devolverá los datos. Finalmente, devuelve los datos de la oferta como un objeto Promise.
+
+```js
+import { login, getOneOffer } from 'qvapay-sdk';
+
+const { accessToken } = await login(userLogin);
+const id = '949780ed-7303-4a34-b8c3-2d55d802c75d';
+
+const res = await getOneOffer(accessToken, id);
+```
+___
+
+## 🏦 Rates
+
+> La sección reates cuenta con las funciones currentCoins, currentRates. Haciendo uso de estas puede mantener a sus usuarios al tanto de las tarifas actualizadas.
+
+### currentRates
+
+> Esta función devuelve una promesa de una matriz de tasas actuales. Obtiene los datos desde la  API de qvapayAPI. Si la solicitud se realiza correctamente, devolverá los datos recibidos. Si hay algún error en la solicitud, devolverá los datos recibidos en la respuesta del error.
+
+```js
+import { currentRates } from 'qvapay-sdk';
+
+const res = await currentRates();
+```
+
+### currentCoins
+
+> Esta función devuelve una promesa con una matriz de tasas actuales. Esta función obtiene los datos de la API qvapay. Si la solicitud es exitosa, los datos se devuelven como parte de la respuesta. Si hay un error, los datos se devuelven como parte de la respuesta del error. Esta función es útil para obtener información sobre las monedas actuales y sus tasas de cambio.
+
+```js
+import { currentCoins } from 'qvapay-sdk';
+
+const res = await currentCoins();
+```
+
+<h3 style='padding: 20px; background-color: indigo'>💡 Este proyecto está en desarrollo y busca ofrecer una solución de código abierto para interactuar con la API de QvaPay. Estamos abiertos a cualquier sugerencia o feedback que nos ayude a mejorar el proyecto. Estamos comprometidos con la satisfacción de nuestros usuarios, por lo que cualquier contribución es bienvenida. Si tienes alguna idea para mejorar el proyecto, no dudes en compartirla con nosotros. ¡Estamos ansiosos por escuchar tus ideas!</h3>

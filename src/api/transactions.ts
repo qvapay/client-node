@@ -35,7 +35,7 @@ export const getOneTransaction = async (
   id: string
 ): Promise<TransactionResponse> => {
   try {
-    const { data } = await qvapayAPI.get(`/transactions/${id}`, {
+    const { data } = await qvapayAPI.post(`/transactions/${id}`, null, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

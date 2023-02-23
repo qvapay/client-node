@@ -5,11 +5,15 @@ export interface User {
   username: string;
   name: string;
   lastname: string;
+  email: string;
   bio: string;
-  logo: string;
   balance: string;
-  kyc: number;
   total_in: string;
   total_out: string;
   latestTransactions: LatestTransaction[];
+  profile_photo_path: string;
+  complete_name: string;
+  name_verified: string;
+  profile_photo_url: string;
+  average_rating: string;
 }

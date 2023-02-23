@@ -3,6 +3,8 @@
 .gitignore
 package-lock.json
 tsconfig.json
+jest.config.json
 src
 node_modules
+docs
 __test__

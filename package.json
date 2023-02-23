@@ -1,6 +1,6 @@
 {
   "name": "qvapay-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Este proyecto es un SDK en TypeScript para Node.js que permite interactuar con la API de QvaPay.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
